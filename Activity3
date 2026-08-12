@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sort the Entered Array</title>
+    <style>
+        table {
+            width: 700px;
+            text-align: center;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<h2>Sort the Entered Array</h2>
+<hr>
+<form>
+    Enter Array Size:
+    <input type="number" id="arraySize">
+    <button type="button" onclick="createArray()">Start</button>
+</form>
+<hr>
+<div id="result"></div>
+<script>
+
+function createArray() {
+
+    let size = parseInt(document.getElementById("arraySize").value);
+    if (isNaN(size) || size <= 0) {
+        document.getElementById("result").innerHTML =
+            "Please enter a valid array size.";
+        return;
+    }
+    let numbers = [];
+    for (let i = 0; i < size; i++) {
+        let value = prompt("Enter value for index " + i + ":");
+        numbers[i] = parseInt(value);
+    }
+    let original = [];
+    for (let i = 0; i < numbers.length; i++) {
+        original[i] = numbers[i];
+    }
+    for (let i = 0; i < numbers.length - 1; i++) {
+        for (let j = 0; j < numbers.length - 1 - i; j++) {
+            if (numbers[j] > numbers[j + 1]) {
+                let temp = numbers[j];
+                numbers[j] = numbers[j + 1];
+                numbers[j + 1] = temp;
+	}
+ }
+}
+  let output = "<table>";
+    output += "<tr>";
+    output += "<th>Index</th>";
+    output += "<th>Original Value</th>";
+    output += "<th>Sorted Value</th>";
+    output += "</tr>";
+
+    for (let i = 0; i < numbers.length; i++) {
+        output += "<tr>";
+        output += "<td>" + i + "</td>";
+        output += "<td>" + original[i] + "</td>";
+        output += "<td>" + numbers[i] + "</td>";
+        output += "</tr>";
+}
+    output += "</table>";
+
+    document.getElementById("result").innerHTML = output;
+}
+
+</script>
+
+</body>
+</html> 
