@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search for a Value</title>
+    <style>
+         table {
+            width: 700px;
+            text-align: center;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+          </style>
+</head>
+<body>
+<h2>Search for a Value</h2>
+<hr>
+<form>
+    Enter Array Size:
+    <input type="number" id="arraySize">
+    <button type="button" onclick="createArray()">Start</button>
+</form>
+
+<div id="result"></div>
+<hr>
+<script>
+
+function createArray() {
+    let size = parseInt(document.getElementById("arraySize").value);
+
+    if (isNaN(size) || size <= 0) {
+        document.getElementById("result").innerHTML = "Enter a valid array size.";
+        return;
+    }
+    let numbers = [];
+
+    for (let i = 0; i < size; i++) {
+        let value = prompt("Enter value for index " + i + ":");
+        numbers[i] = parseInt(value);
+    }
+    let searchValue = parseInt(prompt("Enter a value to search:"));
+
+    let found = false;
+    let foundIndex = -1;
+
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] == searchValue) {
+            found = true;
+            foundIndex = i;
+            break;
+        }
+    }
+    let output = "<h3>Array:</h3>";
+    output += "<table>";
+
+    output += "<tr>";
+    output += "<th>Index</th>";
+
+    for (let i = 0; i < numbers.length; i++) {
+        output += "<th>" + i + "</th>";
+    }
+    output += "</tr>";
+
+    output += "<tr>";
+    output += "<th>Value</th>";
+
+    for (let i = 0; i < numbers.length; i++) {
+        output += "<td>" + numbers[i] + "</td>";
+    }
+    output += "</tr>";
+
+    output += "</table>";
+    if (found) {
+        output += "<b><p>Value " + searchValue + " was found at index " + foundIndex + ".</p></b>";  
+    } else {
+        output += "<b><p>Value " +  searchValue + " does not exist in the array.</p></b>";
+    }
+    document.getElementById("result").innerHTML = output;
+}
+</script>
+
+</body>
+</html>
